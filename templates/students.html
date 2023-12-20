@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <h1>30 Days of Python Challenge Participants</h1>
+
+    {% if students %}
+    {% for student in students %}
+    <h3>{{ student.name }}</h3>
+    <h4>{{ student.country }}</h4>
+    <h4>{{ student.city }}</h4>
+    <h4>{{ student.skills|join(', ') }}</h4>
+    <p>{{ student.bio }}</p>
+    <small><i class="far fa-clock"></i>Joined on {{ student.created_at | strftime('%Y-%m-%d %I:%M %p') }}</small>
+
+    <div class="controlls">
+        <a class="btn btn-primary" href="{{ url_for('update_student', id=student['_id']) }}">Edit</a>
+        <form action="/api/v1.0/students/{{ student['_id'] }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete" />
+        </form>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

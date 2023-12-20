@@ -147,6 +147,4 @@ def update_student (id):
 
 @app.route('/students')
 def list_students():
-    
-    print(os.environ.get('MongoURI'))
     return render_template('students.html', students=db.students.find())
